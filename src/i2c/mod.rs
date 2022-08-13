@@ -63,16 +63,16 @@ impl<B: I2c> Adxl345AccExtract for Device<B> {}
 impl<B: I2c> Adxl345Reader for Device<B> {
     fn access(&mut self, register: u8) -> AdxlResult<u8> {
         let mut buf = [0u8; 1];
-        if let Err(e) = self.bus.write_read(self.address, &[register], &mut buf) {
-            return Err(AdxlError::I2c(format!("{:?}", e)));
+        if let Err(_) = self.bus.write_read(self.address, &[register], &mut buf) {
+            return Err(AdxlError::I2c());
         }
         Ok(buf[0])
     }
     fn acceleration(&mut self) -> AdxlResult<(i16, i16, i16)> {
         let register = 0x32;
         let mut buf = [0u8; 6];
-        if let Err(e) = self.bus.write_read(self.address, &[register], &mut buf) {
-            return Err(AdxlError::I2c(format!("{:?}", e)));
+        if let Err(_) = self.bus.write_read(self.address, &[register], &mut buf) {
+            return Err(AdxlError::I2c());
         }
         Ok(self.extract_acceleration(&buf))
     }
@@ -80,8 +80,8 @@ impl<B: I2c> Adxl345Reader for Device<B> {
 
 impl<B: I2c> Adxl345Writer for Device<B> {
     fn command(&mut self, register: u8, byte: u8) -> Result {
-        if let Err(e) = self.bus.write(self.address, &[register, byte]) {
-            return Err(AdxlError::I2c(format!("{:?}", e)));
+        if let Err(_) = self.bus.write(self.address, &[register, byte]) {
+            return Err(AdxlError::I2c());
         }
         Ok(())
     }

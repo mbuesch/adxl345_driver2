@@ -44,7 +44,7 @@ Which should add something like this in your [Cargo.toml]:
 
 ```toml
 [dependencies]
-adxl345_driver = "0.0.5"
+adxl345_driver = "0.0.6"
 ```
 
 ## Examples
@@ -84,6 +84,17 @@ axis: {'x': 1.6475, 'y': 0.1177, 'z': 8.8260} m/s²
 ```
 
 You can find the latest version by go to [adxl345_driver] on the crates.io website.
+
+## no_std
+
+This crate can be used in `no_std` environments.
+Just enable the `no_std` feature, if you want to build without `std` library.
+
+```
+```toml
+[dependencies]
+adxl345_driver = { version = "0.0.6", features = ["no_std"] }
+```
 
 ## Contributing
 
