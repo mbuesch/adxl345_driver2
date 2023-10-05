@@ -23,7 +23,7 @@
 //! Contains the SPI driver for the device.
 
 use crate::{Adxl345, Adxl345AccExtract, Adxl345Init, Adxl345Reader, Adxl345Writer, AdxlError, AdxlResult, Result};
-use embedded_hal::spi::{SpiBus, SpiDevice};
+use embedded_hal::spi::SpiDevice;
 
 /// SPI driver structure for the device.
 #[derive(Debug)]
@@ -35,7 +35,7 @@ pub struct Device<B> {
 }
 
 impl<B> Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {
     /// Constructor.
     ///
@@ -50,19 +50,19 @@ impl<B> Device<B>
 }
 
 impl<B> Adxl345 for Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {}
 
 impl<B> Adxl345Init for Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {}
 
 impl<B> Adxl345AccExtract for Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {}
 
 impl<B> Adxl345Reader for Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {
     fn access(&mut self, register: u8) -> AdxlResult<u8> {
         let mut read_buf = [0u8, 0u8];
@@ -94,7 +94,7 @@ impl<B> Adxl345Reader for Device<B>
 }
 
 impl<B> Adxl345Writer for Device<B>
-    where B: SpiDevice, B::Bus: SpiBus
+    where B: SpiDevice
 {
     fn command(&mut self, register: u8, byte: u8) -> Result {
         debug_assert!(register <= 0x7F);

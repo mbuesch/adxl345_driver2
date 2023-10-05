@@ -14,13 +14,11 @@ repository = "https://github.com/Dragonrun1/adxl345_driver"
 [dependencies]
 bitflags = "1.2.1"
 c2rust-bitfields = { version = "0.3.0", features = ["no_std"], default_features = false }
-embedded-hal = "=1.0.0-alpha.9"
+embedded-hal = "=1.0.0-alpha.10"
 
 [dev-dependencies]
 anyhow = "1.0.33"
 ctrlc = { version = "3.1.7", features = ["termination"] }
-#XXX: latest rppal release 0.13 doesn't support embedded-hal 1.0, which we need. Go with unreleased version for now.
-rppal = { git = "https://github.com/mbuesch/rppal.git", rev = "4a3de408463318afa1e59e1a36e61a08b2ace5cd", features = ["hal"] }
 
 [features]
 default = []
