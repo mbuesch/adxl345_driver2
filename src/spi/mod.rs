@@ -68,7 +68,7 @@ impl<B> Adxl345Reader for Device<B>
         let mut read_buf = [0u8, 0u8];
         debug_assert!(register <= 0x7F);
         let write_buf = [(register & 0x7Fu8) | 0x80u8, 0u8];
-        if let Err(_) = self.bus.transfer(&mut read_buf, &write_buf) {
+        if self.bus.transfer(&mut read_buf, &write_buf).is_err() {
             return Err(AdxlError::Spi());
         }
         Ok(read_buf[1])
@@ -86,7 +86,7 @@ impl<B> Adxl345Reader for Device<B>
             0u8,
             0u8,
         ];
-        if let Err(_) = self.bus.transfer(&mut read_buf, &write_buf) {
+        if self.bus.transfer(&mut read_buf, &write_buf).is_err() {
             return Err(AdxlError::Spi());
         }
         Ok(self.extract_acceleration(&read_buf[1..7]))
@@ -99,7 +99,7 @@ impl<B> Adxl345Writer for Device<B>
     fn command(&mut self, register: u8, byte: u8) -> Result {
         debug_assert!(register <= 0x7F);
         let write_buf = [(register & 0x7Fu8), byte];
-        if let Err(_) = self.bus.write(&write_buf) {
+        if self.bus.write(&write_buf).is_err() {
             return Err(AdxlError::Spi());
         }
         Ok(())
