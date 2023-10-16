@@ -46,7 +46,7 @@
 use adxl345_driver::{spi::Device, Adxl345Reader, Adxl345Writer};
 use anyhow::{Context, Result};
 use rppal::{
-    spi::{Bus, Mode, SlaveSelect, Spi, SimpleHalSpiDevice},
+    spi::{Bus, Mode, SimpleHalSpiDevice, SlaveSelect, Spi},
     system::DeviceInfo,
 };
 use std::{
@@ -69,7 +69,12 @@ fn main() -> Result<()> {
             .context("Failed to get new DeviceInfo")?
             .model()
     );
-    let spi = SimpleHalSpiDevice::new(Spi::new(Bus::Spi0, SlaveSelect::Ss0, 1_000_000, Mode::Mode3)?);
+    let spi = SimpleHalSpiDevice::new(Spi::new(
+        Bus::Spi0,
+        SlaveSelect::Ss0,
+        1_000_000,
+        Mode::Mode3,
+    )?);
     let mut adxl345 = Device::new(spi, false).context("Failed to get instance")?;
     let id = adxl345.device_id().context("Failed to get device id")?;
     println!("Device id = {}", id);

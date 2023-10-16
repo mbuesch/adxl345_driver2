@@ -21,7 +21,10 @@
 // SOFTWARE.
 //! Contains the I²C driver for the device.
 
-use crate::{Adxl345, Adxl345AccExtract, Adxl345Init, Adxl345Reader, Adxl345Writer, AdxlError, AdxlResult, Result};
+use crate::{
+    Adxl345, Adxl345AccExtract, Adxl345Init, Adxl345Reader, Adxl345Writer, AdxlError, AdxlResult,
+    Result,
+};
 use embedded_hal::i2c::{I2c, SevenBitAddress};
 
 /// I²C driver structure for the device.
@@ -63,7 +66,11 @@ impl<B: I2c> Adxl345AccExtract for Device<B> {}
 impl<B: I2c> Adxl345Reader for Device<B> {
     fn access(&mut self, register: u8) -> AdxlResult<u8> {
         let mut buf = [0u8; 1];
-        if self.bus.write_read(self.address, &[register], &mut buf).is_err() {
+        if self
+            .bus
+            .write_read(self.address, &[register], &mut buf)
+            .is_err()
+        {
             return Err(AdxlError::I2c());
         }
         Ok(buf[0])
@@ -71,7 +78,11 @@ impl<B: I2c> Adxl345Reader for Device<B> {
     fn acceleration(&mut self) -> AdxlResult<(i16, i16, i16)> {
         let register = 0x32;
         let mut buf = [0u8; 6];
-        if self.bus.write_read(self.address, &[register], &mut buf).is_err() {
+        if self
+            .bus
+            .write_read(self.address, &[register], &mut buf)
+            .is_err()
+        {
             return Err(AdxlError::I2c());
         }
         Ok(self.extract_acceleration(&buf))

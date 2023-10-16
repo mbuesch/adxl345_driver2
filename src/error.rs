@@ -37,19 +37,21 @@ pub enum AdxlError {
 impl core::fmt::Display for AdxlError {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         match self {
-            AdxlError::IllegalWriteAddress(addr) =>
-                write!(f, "Attempted illegal write to address {}", addr),
-            AdxlError::I2c() =>
-                write!(f, "I²C interface access failed"),
-            AdxlError::Spi() =>
-                write!(f, "SPI interface access failed"),
-            AdxlError::UnknownModeBit(value) =>
-                write!(f, "Received one or more set unknown mode bit(s) in value: {}", value),
+            AdxlError::IllegalWriteAddress(addr) => {
+                write!(f, "Attempted illegal write to address {}", addr)
+            }
+            AdxlError::I2c() => write!(f, "I²C interface access failed"),
+            AdxlError::Spi() => write!(f, "SPI interface access failed"),
+            AdxlError::UnknownModeBit(value) => write!(
+                f,
+                "Received one or more set unknown mode bit(s) in value: {}",
+                value
+            ),
         }
     }
 }
 
-#[cfg(not(feature="no_std"))]
+#[cfg(not(feature = "no_std"))]
 impl std::error::Error for AdxlError {}
 
 /// Result type used when return value is needed from methods in library.
