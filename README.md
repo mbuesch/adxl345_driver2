@@ -1,24 +1,15 @@
-# adxl345_driver
+# adxl345_driver2
 
-This is an implementation of a hardware driver for a [ADXL345] type 3-Axis
-Digital Accelerometer written in [Rust] using [embedded-hal] `I2c` and `Spi` traits.
+This is a hardware driver for [ADXL345] and [ADXL346] type 3-Axis
+Digital Accelerometers written in [Rust] using [embedded-hal] `I2c` and `Spi` traits.
 That means it runs on all hardware layers that implement the [embedded-hal] traits.
 
-It exposes a simple trait-based API for the command set which minimizes the
-coupling between the hardware driver (I²C, etc) and the code that passes
-commands and data to and from the accelerometer.
-
-Through the name says ADXL345 the driver should also work with the [ADXL346]
+Although the name says adxl345 the driver should also work with the [ADXL346]
 device as well since the only difference between them is the physical packaging
 and not the internal workings.
 
-## Table Of Contents
-
-* [Getting Started](#getting-started)
-* [Using The Crate](#using-the-crate)
-* [Examples](#examples)
-* [Contributing](#contributing)
-* [Licenses](#licenses)
+This crate is a fork of the adxl345_driver crate.
+This crate still is API compatible with the original adxl345_driver crate.
 
 ## Getting Started
 
@@ -32,42 +23,41 @@ ESP32 with [esp-idf-hal]. But this crate is not restricted to these HAL layers.
 
 ### Using The Crate
 
-To use the crate in your own project all you need to do is include it in
-`[dependencies]` of you project like you would any other crate.
-If you have [cargo-edit] install then on the command line you can use:
+You can use `cargo add` to add the driver to your `Cargo.toml`
 
-```shell script
-cargo add adxl345_driver
+```sh
+cargo add adxl345_driver2
 ```
 
-Which should add something like this in your [Cargo.toml]:
+or you can manually add the driver to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-adxl345_driver = "0.0.6"
+adxl345_driver2 = "1"
 ```
 
 ## Examples
 
-You will find examples in the `examples` directory. The Raspberry Pi I²C
-example was used for testing during initial development on a RPi 4.
+You will find examples in the `examples` directory.
+The Raspberry Pi I²C and SPI examples are available.
 
 To build the I²C example start by clone this project somewhere on your Raspberry
 Pi:
 
-```shell
-git clone https://github.com/Dragonrun1/adxl345_driver
+```sh
+git clone https://git.bues.ch/git/adxl345_driver2
 ```
 
 Next execute the follow to build the example:
 
-```shell
+```sh
+cd adxl345_driver2
 cargo build --example i2c
 ```
 
-And finally execute:
+And finally execute the example:
 
-```shell
+```sh
 sudo ./target/debug/examples/i2c
 ```
 
@@ -83,55 +73,37 @@ axis: {'x': 1.6475, 'y': 0.1177, 'z': 8.8260} m/s²
 ...
 ```
 
-You can find the latest version by go to [adxl345_driver] on the crates.io website.
-
 ## no_std
 
 This crate can be used in `no_std` environments.
 Just enable the `no_std` feature, if you want to build without `std` library.
 
-```
+`no_std` currently only disables the implementation of `std::error::Error` for `AdxlError`.
+
 ```toml
 [dependencies]
-adxl345_driver = { version = "0.0.6", features = ["no_std"] }
+adxl345_driver2 = { version = "1", features = ["no_std"] }
 ```
 
-## Contributing
+## TODO
 
-Contributors are welcome.
-Make sure you have read the [Contributor Covenant Code of Conduct].
-All contributed code will be considered to also be contributed under a [MIT]
-license.
-Please include your information in a comment on all code files for the copyright
-etc.
-
-All contributed documentation or non-code text like this README etc. will be
-consider to be under the same [CC-BY-SA] license.
+- Most of the driver is currently implemented as `provided` methods in a chain of traits.
+  That is more complicated than it needs to be.
+  And it also exposes the low level bus access routines to the user API.
+  It would be better to have two trait based low level bus access structs for I²C and SPI
+  and then implement a driver struct that is generic over this trait.
+  The problem with this change is that it is a user visible API change.
+  Therefore, we'll keep the old implementation for now.
 
 ## Licenses
 
-All code is available under the [MIT] license.
-You can find a copy of the license in the [LICENSE] file.
+All code files are available under the `MIT` license.
+You can find a copy of the license in the `LICENSE` file.
 
-All documentation like this README is licensed under a
-<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
-(CC-BY-SA).
+All additional documentation like this `README` is licensed under a
+[CC-BY-SA / Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
+[Rust]: https://www.rust-lang.org/
+[embedded-hal]: https://crates.io/crates/embedded-hal
 [ADXL345]: https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL345.pdf
 [ADXL346]: https://www.analog.com/media/en/technical-documentation/data-sheets/ADXL346.pdf
-[CC-BY-SA]: http://creativecommons.org/licenses/by-sa/4.0/
-[Cargo.toml]: https://doc.rust-lang.org/cargo/guide/dependencies.html
-[Contributor Covenant Code of Conduct]: CODE_OF_CONDUCT.md
-[LICENSE]: LICENSE
-[MIT]: https://opensource.org/licenses/MIT
-[Rust]: https://www.rust-lang.org/
-[adxl345_driver]: https://crates.io/crates/adxl345_driver
-[cargo-edit]: https://crates.io/crates/cargo-edit
-[embedded-hal]: https://crates.io/crates/embedded-hal
-[rppal]: https://github.com/golemparts/rppal
-[esp-idf-hal]: https://crates.io/crates/esp-idf-hal
-
-<hr>
-<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
-<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-</a>

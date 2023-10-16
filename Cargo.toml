@@ -1,10 +1,10 @@
 [package]
 name = "adxl345_driver2"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Michael Büsch <m@bues.ch>", "Michael Cummings <dragonrun1@gmail.com>"]
 description = "Driver for Analog Device ADXL345/ADXL346 3-Axis Digital Accelerometer"
 edition = "2021"
-keywords = ["adxl345", "embedded", "driver"]
+keywords = ["adxl345", "adxl346", "embedded", "driver"]
 categories = ["embedded", "hardware-support", "os"]
 license = "MIT"
 homepage = "https://bues.ch"
