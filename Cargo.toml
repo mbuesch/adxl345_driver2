@@ -12,8 +12,8 @@ readme = "README.md"
 repository = "https://github.com/Dragonrun1/adxl345_driver"
 
 [dependencies]
-bitflags = "1.2.1"
-c2rust-bitfields = { version = "0.3.0", features = ["no_std"], default_features = false }
+bitflags = "2"
+c2rust-bitfields = { version = "0.18", features = ["no_std"], default_features = false }
 embedded-hal = "=1.0.0-alpha.10"
 
 [dev-dependencies]
