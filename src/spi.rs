@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 //! Contains the SPI driver for the device.
 
 use crate::{
@@ -31,7 +32,7 @@ use embedded_hal::spi::SpiDevice;
 /// SPI driver structure for the device.
 #[derive(Debug)]
 pub struct Device<B> {
-    /// Any bus object implementing the `embedded_hal::spi::blocking::{Transfer, Write}` traits.
+    /// Any bus object implementing the `embedded_hal` `SpiDevice` traits.
     bus: B,
     /// true: SPI 3-wire mode; false: SPI 4-wire mode.
     three_wire: bool,
@@ -44,7 +45,7 @@ where
     /// Constructor.
     ///
     /// ## Arguments
-    /// * `bus` - Any bus object implementing the `embedded_hal::spi::blocking::{Transfer, Write}` traits.
+    /// * `bus` - Any bus object implementing the `embedded_hal` `SpiDevice` traits.
     /// * `three_wire` - true: SPI 3-wire mode; false: SPI 4-wire mode.
     pub fn new(bus: B, three_wire: bool) -> AdxlResult<Self> {
         let mut device = Device { bus, three_wire };

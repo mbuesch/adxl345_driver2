@@ -1,5 +1,6 @@
 // MIT License
 //
+// Copyright 2023 Michael Büsch <m@bues.ch>
 // Copyright © 2020-present, Michael Cummings <mgcummings@yahoo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 //! Contains the I²C driver for the device.
 
 use crate::{
@@ -30,7 +32,7 @@ use embedded_hal::i2c::{I2c, SevenBitAddress};
 /// I²C driver structure for the device.
 #[derive(Debug)]
 pub struct Device<B> {
-    /// Any bus object implementing the `embedded_hal::i2c::blocking::I2c` trait.
+    /// Any bus object implementing the `embedded_hal` `I2c` trait.
     bus: B,
     /// The 7 bit address of the device.
     address: SevenBitAddress,
@@ -40,7 +42,7 @@ impl<B: I2c> Device<B> {
     /// Constructor with default slave address `0x53`.
     ///
     /// ## Arguments
-    /// * `bus` - Any object implementing the `embedded_hal::i2c::blocking::I2c` trait.
+    /// * `bus` - Any object implementing the `embedded_hal` `I2c` trait.
     pub fn new(bus: B) -> AdxlResult<Self> {
         Self::with_address(bus, 0x53)
     }
@@ -50,7 +52,7 @@ impl<B: I2c> Device<B> {
     /// high logic level on the `ALT ADDRESS` pin.
     ///
     /// ## Arguments
-    /// * `bus` - Any object implementing the `embedded_hal::i2c::blocking::I2c` trait.
+    /// * `bus` - Any object implementing the `embedded_hal` `I2c` trait.
     /// * `address` - Address of ADXL345 device.
     pub fn with_address(bus: B, address: u8) -> AdxlResult<Self> {
         let mut device = Device { bus, address };
