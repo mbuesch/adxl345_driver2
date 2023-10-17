@@ -20,6 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
 //! This is a simple example of how to use library.
 //!
 //! The example was written assuming Raspberry Pi OS but should work with other
@@ -28,11 +29,11 @@
 //! ## Examples
 //! To build the example use:
 //! ```sh, no_run
-//! cargo build --example spi
+//! cargo build --example rppal-spi
 //! ```
 //! Then to run use:
 //! ```sh, no_run
-//! sudo ./target/debug/examples/spi
+//! sudo ./target/debug/examples/rppal-spi
 //! ```
 //!
 //! Output example:
@@ -43,7 +44,7 @@
 //! ...
 //! ```
 
-use adxl345_driver::{spi::Device, Adxl345Reader, Adxl345Writer};
+use adxl345_driver2::{spi::Device, Adxl345Reader, Adxl345Writer};
 use anyhow::{Context, Result};
 use rppal::{
     spi::{Bus, Mode, SimpleHalSpiDevice, SlaveSelect, Spi},

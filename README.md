@@ -52,13 +52,13 @@ Next execute the follow to build the example:
 
 ```sh
 cd adxl345_driver2
-cargo build --example i2c
+cargo build --example rppal-i2c
 ```
 
 And finally execute the example:
 
 ```sh
-sudo ./target/debug/examples/i2c
+sudo ./target/debug/examples/rppal-i2c
 ```
 
 You should see the series of x, y, z values displayed in the terminal if your

@@ -19,6 +19,7 @@ embedded-hal = "=1.0.0-alpha.10"
 [dev-dependencies]
 anyhow = "1"
 ctrlc = { version = "3", features = ["termination"] }
+rppal = "0.14" #TODO 0.14 is not compatible with embedded-hal >= 1.0.0-alpha.10.
 
 [features]
 default = []
