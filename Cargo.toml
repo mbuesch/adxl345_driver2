@@ -2,7 +2,7 @@
 
 [package]
 name        = "adxl345_driver2"
-version     = "1.0.0"
+version     = "2.0.0"
 authors     = [ "Michael Büsch <m@bues.ch>", "Michael Cummings <dragonrun1@gmail.com>" ]
 description = "Driver for Analog Device ADXL345/ADXL346 3-Axis Digital Accelerometer"
 edition     = "2021"
@@ -16,12 +16,12 @@ repository  = "https://git.bues.ch/git/adxl345_driver2.git"
 [dependencies]
 bitflags = "2"
 c2rust-bitfields = { version = "0.18", features = ["no_std"], default_features = false }
-embedded-hal = "=1.0.0-rc.1"
+embedded-hal = "1"
 
 [dev-dependencies]
 anyhow = "1"
 ctrlc = { version = "3", features = ["termination"] }
-rppal = { git = "https://github.com/golemparts/rppal.git", rev = "86dab12376ea2fb61f28f4a2801b8d1d89db25a0", features = ["hal"] }
+rppal = { version = "0.17", features = ["hal"] }
 
 [features]
 default = []
