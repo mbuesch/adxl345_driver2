@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright 2023 Michael Büsch <m@bues.ch>
+// Copyright 2023-2024 Michael Büsch <m@bues.ch>
 // Copyright © 2020-present, Michael Cummings <mgcummings@yahoo.com>.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

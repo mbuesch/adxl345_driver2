@@ -33,7 +33,7 @@ or you can manually add the driver to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-adxl345_driver2 = "1"
+adxl345_driver2 = "2"
 ```
 
 ## Examples
@@ -82,7 +82,7 @@ Just enable the `no_std` feature, if you want to build without `std` library.
 
 ```toml
 [dependencies]
-adxl345_driver2 = { version = "1", features = ["no_std"] }
+adxl345_driver2 = { version = "2", features = ["no_std"] }
 ```
 
 ## TODO
