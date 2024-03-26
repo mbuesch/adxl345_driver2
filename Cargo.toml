@@ -15,7 +15,7 @@ repository  = "https://git.bues.ch/git/adxl345_driver2.git"
 
 [dependencies]
 bitflags = "2"
-c2rust-bitfields = { version = "0.18", features = ["no_std"], default_features = false }
+c2rust-bitfields = { version = "0.18", features = ["no_std"], default-features = false }
 embedded-hal = "1"
 
 [dev-dependencies]
