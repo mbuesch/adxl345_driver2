@@ -2,7 +2,7 @@
 
 [package]
 name        = "adxl345_driver2"
-version     = "2.0.0"
+version     = "2.0.1"
 authors     = [ "Michael Büsch <m@bues.ch>", "Michael Cummings <dragonrun1@gmail.com>" ]
 description = "Driver for Analog Device ADXL345/ADXL346 3-Axis Digital Accelerometer"
 edition     = "2021"
