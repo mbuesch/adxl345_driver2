@@ -24,8 +24,7 @@
 //! Provides a complete ADXL345 compatible command set and supporting code.
 //!
 //! This is meant to be a hardware level driver interface for the device.
-
-#![cfg_attr(no_std, no_std)]
+#![cfg_attr(feature = "no_std", no_std)]
 
 #[macro_use]
 extern crate bitflags;
